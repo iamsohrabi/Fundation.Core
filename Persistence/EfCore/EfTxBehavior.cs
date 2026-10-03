@@ -74,7 +74,7 @@ public class EfTxBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TRe
 
                 return response;
             }
-            catch (System.Exception e)
+            catch (System.Exception)
             {
                 if (!isInnerTransaction)
                     await transaction.RollbackAsync(cancellationToken);

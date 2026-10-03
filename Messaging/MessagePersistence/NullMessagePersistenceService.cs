@@ -9,7 +9,11 @@ namespace Fundation.Core.Messaging.MessagePersistence;
 
 public class NullMessagePersistenceService : IMessagePersistenceService
 {
-    public event Action<StoreMessage, MessageDeliveryType>? MessageProcessed;
+    public event Action<StoreMessage, MessageDeliveryType>? MessageProcessed
+    {
+        add { }
+        remove { }
+    }
 
     public Task<IReadOnlyList<StoreMessage>> GetByFilterAsync(
         Expression<Func<StoreMessage, bool>>? predicate = null,

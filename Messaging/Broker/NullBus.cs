@@ -42,7 +42,11 @@ public class NullBus : IBus
         return Task.CompletedTask;
     }
 
-    public event Action<object>? MessagePublished;
+    public event Action<object>? MessagePublished
+    {
+        add { }
+        remove { }
+    }
 
     public Task StartAsync(CancellationToken cancellationToken = default)
     {
@@ -111,5 +115,9 @@ public class NullBus : IBus
     {
     }
 
-    public event Action<object, Type>? MessageConsumed;
+    public event Action<object, Type>? MessageConsumed
+    {
+        add { }
+        remove { }
+    }
 }
