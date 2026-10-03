@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using Fundation.Abstractions.Core;
-using SqlStreamStore.Logging;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Fundation.Core;
 
@@ -8,10 +9,16 @@ public class ExclusiveLock : IExclusiveLock
 {
     private readonly ConcurrentDictionary<object, SemaphoreSlim> _semaphoreDictionary;
     private readonly ConcurrentDictionary<object, object> _lockDictionary;
-    private readonly ILog _logger = LogProvider.For<ExclusiveLock>();
+    private readonly ILogger<ExclusiveLock> _logger;
 
     public ExclusiveLock()
+        : this(NullLogger<ExclusiveLock>.Instance)
     {
+    }
+
+    public ExclusiveLock(ILogger<ExclusiveLock> logger)
+    {
+        _logger = logger;
         _semaphoreDictionary = new ConcurrentDictionary<object, SemaphoreSlim>();
         _lockDictionary = new ConcurrentDictionary<object, object>();
     }
@@ -44,7 +51,7 @@ public class ExclusiveLock : IExclusiveLock
         }
         catch (System.Exception e)
         {
-            _logger.Error("Exception when performing exclusive execute", e);
+            _logger.LogError(e, "Exception when performing exclusive execute");
         }
         finally
         {
@@ -63,7 +70,7 @@ public class ExclusiveLock : IExclusiveLock
         }
         catch (System.Exception e)
         {
-            _logger.ErrorException("Exception when performing exclusive execute async", e);
+            _logger.LogError(e, "Exception when performing exclusive execute async");
         }
         finally
         {

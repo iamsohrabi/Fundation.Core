@@ -9,6 +9,7 @@ using Fundation.Core.IdsGenerator;
 using Fundation.Core.Serialization;
 using Fundation.Core.Types;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace Fundation.Core.Registrations;
 
@@ -26,7 +27,8 @@ public static class CoreRegistrationExtensions
 
         services.AddSingleton(systemInfo);
 
-        services.AddSingleton<IExclusiveLock, ExclusiveLock>();
+        services.AddSingleton<IExclusiveLock>(serviceProvider =>
+            new ExclusiveLock(serviceProvider.GetRequiredService<ILogger<ExclusiveLock>>()));
 
         services.AddTransient<IAggregatesDomainEventsRequestStore, AggregatesDomainEventsStore>();
 

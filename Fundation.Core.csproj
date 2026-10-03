@@ -5,6 +5,11 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>annotations</Nullable>
+    <Version>1.0.0</Version>
+    <PackageId>Fundation.Core</PackageId>
+    <Authors>Mehrdad Sohrabi</Authors>
+    <Description>Core contracts and types for building .NET services based on domain-driven design, CQRS, events, messaging, and persistence abstractions.</Description>
+    <PackageOutputPath>../Packages</PackageOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -43,7 +48,6 @@
     <PackageReference Include="Scrutor" Version="4.2.2" />
     <PackageReference Include="Serilog" Version="4.0.0" />
     <PackageReference Include="Spectre.Console" Version="0.49.1" />
-    <PackageReference Include="SqlStreamStore" Version="1.2.1-alpha.3" />
     <PackageReference Include="System.Reactive.Linq" Version="6.0.1" />
     <PackageReference Include="System.Interactive.Async" Version="6.0.1" />
     <PackageReference Include="System.Reactive" Version="6.0.1" />
